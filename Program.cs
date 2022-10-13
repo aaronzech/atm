@@ -68,15 +68,40 @@ public class cardHolder
             Console.WriteLine("1. Deposit");
             Console.WriteLine("2. Withdraw");
             Console.WriteLine("3. Show Balance");
-            Console.WriteLine("4. Exit");
+            Console.WriteLine("4. Change Pin");
+            Console.WriteLine("5. Exit");
         }
         void deposit(cardHolder currentUser)
         {
             Console.WriteLine("How much $$ would you like to deposit: ");
             double deposit = Double.Parse(Console.ReadLine());
             currentUser.setBalance(currentUser.getBalance() + deposit);
-            Console.WriteLine("Thank you for your $$. Your new balance is: " + currentUser.getBalance());
+            Console.WriteLine("Thank you for your $$. Your new balance is: " + currentUser.getBalance()+"\n");
         }
+        void changePin(cardHolder currentUser)
+        {
+            Console.WriteLine("Please Enter your new pin: ");
+            int pin = int.Parse(Console.ReadLine());
+            int confirmPin = 0;
+            do
+            {
+                Console.WriteLine("Please confirm new pin");
+                confirmPin = int.Parse(Console.ReadLine());
+                if (confirmPin == pin)
+                {
+                    currentUser.setPin(pin);
+                    
+                }
+                else
+                {
+                    Console.WriteLine("New pin does not match:");
+                }
+            }while (pin != confirmPin);
+            Console.WriteLine("Pin Changed!\n");
+
+
+        }
+
         void withdraw(cardHolder currentUser)
         {
             Console.WriteLine("How much $$ would you like to withdraw: ");
@@ -148,11 +173,12 @@ public class cardHolder
             if(option == 1) { deposit(currentUser); }
             else if(option == 2) { withdraw(currentUser);}
             else if (option == 3) { balance(currentUser); }
-            else if (option == 4) { break; }
+            else if (option == 4) { changePin(currentUser); }
+            else if (option == 5) { break; }
             else { option = 0; }
 
         }
-        while (option != 4);
+        while (option != 5);
         Console.WriteLine("Have a nice day");
         
     }
